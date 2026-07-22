@@ -39,3 +39,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# media masters (vídeos originais de alta resolução — pesados demais p/ git;
+# as versões otimizadas ficam em /public/videos)
+/raw-media
+
+# imagens originais em alta (backup local gerado na otimização; as versões
+# leves servidas ficam em /public/images)
+/assets-originais
+
+# claude code — configuração local da máquina
+.claude/settings.local.json

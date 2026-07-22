@@ -1,26 +1,127 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@layer base {
+  html {
+    /* Deixa as âncoras pararem abaixo da navbar fixa (80px) na rolagem nativa
+       — relevante no caminho sem Lenis (prefers-reduced-motion). */
+    scroll-padding-top: 5rem;
+  }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    @apply bg-gt-black text-white font-sans antialiased;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* -------------------------------------------------------------------------- */
+/* Lenis — rolagem suave (smooth scroll)                                      */
+/* O Lenis interpola a rolagem; ele mesmo gerencia o "scroll-behavior", então */
+/* NÃO definimos `scroll-behavior: smooth` no html (os dois juntos brigam nos */
+/* saltos de âncora). Deixamos de fora a regra `iframe { pointer-events:none }`*/
+/* de propósito, para o mapa do Google no rodapé continuar interativo.        */
+/* -------------------------------------------------------------------------- */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Sem Lenis (quando o usuário pede menos movimento), mantemos os saltos de
+   âncora suaves de forma nativa. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Cursor customizado                                                         */
+/* Ponto + anel que substituem o ponteiro nativo (só quando o componente      */
+/* CustomCursor está ativo, que adiciona `.cursor-none` no <html>). As         */
+/* transições ficam atrás de `no-preference` — reduced-motion vê o cursor      */
+/* instantâneo, sem animação.                                                 */
+/* -------------------------------------------------------------------------- */
+.cursor-none,
+.cursor-none * {
+  cursor: none !important;
+}
+
+.gt-cursor {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.gt-cursor__ring,
+.gt-cursor__dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 9999px;
+  will-change: transform;
+}
+
+.gt-cursor__ring {
+  height: 34px;
+  width: 34px;
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+}
+
+.gt-cursor__dot {
+  height: 6px;
+  width: 6px;
+  background-color: #9b392a; /* gt-terracota */
+}
+
+/* Estado hover — sobre elementos interativos o anel cresce e fica terracota. */
+.gt-cursor.is-hover .gt-cursor__ring {
+  height: 56px;
+  width: 56px;
+  border-color: #9b392a;
+  background-color: rgba(155, 57, 42, 0.12);
+}
+.gt-cursor.is-hover .gt-cursor__dot {
+  opacity: 0;
+}
+
+/* Indicador de arrastar horizontal ("↔") sobre o slider de comparação. */
+.gt-cursor__resize {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  color: #ffffff;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.7));
+  will-change: transform;
+}
+.gt-cursor.is-resize .gt-cursor__ring,
+.gt-cursor.is-resize .gt-cursor__dot {
+  opacity: 0;
+}
+.gt-cursor.is-resize .gt-cursor__resize {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .gt-cursor {
+    transition: opacity 0.3s ease;
+  }
+  .gt-cursor__ring {
+    transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease,
+      background-color 0.25s ease;
+  }
 }
