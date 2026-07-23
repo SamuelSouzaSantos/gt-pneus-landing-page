@@ -27,9 +27,14 @@ const clamp = (n: number) => Math.min(100, Math.max(0, n));
 const EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
 
 /**
- * Slider de comparação "Antes / Depois". O usuário arrasta a linha divisória
- * (ou usa as setas do teclado) para transformar, no mesmo frame, a roda
- * destruída na roda recuperada.
+ * Slider de comparação "Antes / Depois". O usuário arrasta a **alça** (o botão
+ * com as setas ‹›) — ou usa as setas do teclado — para transformar, no mesmo
+ * frame, a roda destruída na roda recuperada.
+ *
+ * O arrasto é iniciado apenas pela alça, de propósito: no mobile, capturar o
+ * toque em toda a imagem sequestrava a rolagem da página. Por isso o container
+ * fica livre (sem `touch-none`/`data-lenis-prevent`) e só a alça bloqueia o
+ * gesto nativo enquanto está sendo arrastada.
  *
  * Utilitário genérico: recebe `before`/`after` como conteúdo que preenche o
  * quadro (imagem, vídeo, o que for). O visual é atualizado por escrita direta
@@ -55,6 +60,7 @@ export function CompareSlider({
   const handleRef = useRef<HTMLButtonElement>(null);
   const posRef = useRef(initial);
   const dragging = useRef(false);
+  const grabOffset = useRef(0);
 
   const initialClip = `inset(0 ${100 - initial}% 0 0)`;
 
@@ -95,17 +101,23 @@ export function CompareSlider({
     [apply]
   );
 
-  const onPointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
+  const onPointerDown = (event: ReactPointerEvent<HTMLButtonElement>) => {
+    const el = containerRef.current;
+    if (!el) return;
     dragging.current = true;
     event.currentTarget.setPointerCapture(event.pointerId);
-    setFromClientX(event.clientX);
+    // Guarda a distância entre o dedo/cursor e a linha, para a alça não "pular"
+    // ao ser agarrada fora do centro.
+    const rect = el.getBoundingClientRect();
+    const dividerX = rect.left + (posRef.current / 100) * rect.width;
+    grabOffset.current = event.clientX - dividerX;
   };
 
-  const onPointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
-    if (dragging.current) setFromClientX(event.clientX);
+  const onPointerMove = (event: ReactPointerEvent<HTMLButtonElement>) => {
+    if (dragging.current) setFromClientX(event.clientX - grabOffset.current);
   };
 
-  const stopDragging = (event: ReactPointerEvent<HTMLDivElement>) => {
+  const stopDragging = (event: ReactPointerEvent<HTMLButtonElement>) => {
     dragging.current = false;
     event.currentTarget.releasePointerCapture?.(event.pointerId);
   };
@@ -127,15 +139,8 @@ export function CompareSlider({
   return (
     <div
       ref={containerRef}
-      data-lenis-prevent
-      data-cursor="resize"
-      onPointerDown={onPointerDown}
-      onPointerMove={onPointerMove}
-      onPointerUp={stopDragging}
-      onPointerCancel={stopDragging}
       className={cn(
-        "group relative touch-none select-none overflow-hidden bg-gt-dark-gray",
-        "cursor-ew-resize",
+        "group relative select-none overflow-hidden bg-gt-dark-gray",
         className
       )}
     >
@@ -175,9 +180,16 @@ export function CompareSlider({
           aria-valuenow={initial}
           aria-orientation="horizontal"
           onKeyDown={onKeyDown}
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={stopDragging}
+          onPointerCancel={stopDragging}
+          data-lenis-prevent
+          data-cursor="resize"
           className={cn(
-            "pointer-events-auto absolute left-1/2 top-1/2 grid h-11 w-11 -translate-x-1/2 -translate-y-1/2",
-            "place-items-center rounded-full border border-white/70 bg-black/55 text-white backdrop-blur-md",
+            "pointer-events-auto absolute left-1/2 top-1/2 grid h-12 w-12 -translate-x-1/2 -translate-y-1/2",
+            "cursor-ew-resize touch-none place-items-center rounded-full border border-white/70",
+            "bg-black/55 text-white backdrop-blur-md",
             "shadow-lg transition-transform duration-200 group-hover:scale-105",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gt-terracota focus-visible:ring-offset-2 focus-visible:ring-offset-black"
           )}

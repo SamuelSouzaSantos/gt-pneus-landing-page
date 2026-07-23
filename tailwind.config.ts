@@ -27,24 +27,6 @@ const config: Config = {
         "gt-radial":
           "radial-gradient(circle at 50% 0%, rgba(155,57,42,0.15), transparent 60%)",
       },
-      keyframes: {
-        // Rodinha do mouse descendo em loop (indicador de "role para baixo").
-        "scroll-wheel": {
-          "0%": { transform: "translateY(0)", opacity: "0" },
-          "20%": { opacity: "1" },
-          "70%": { transform: "translateY(10px)", opacity: "1" },
-          "100%": { transform: "translateY(12px)", opacity: "0" },
-        },
-        // Respiro sutil do conjunto do mouse.
-        "scroll-bob": {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(5px)" },
-        },
-      },
-      animation: {
-        "scroll-wheel": "scroll-wheel 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite",
-        "scroll-bob": "scroll-bob 2.6s ease-in-out infinite",
-      },
     },
   },
   plugins: [],

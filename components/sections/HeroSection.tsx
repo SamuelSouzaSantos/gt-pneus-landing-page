@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
-import { ScrollCue } from "@/components/ui/ScrollCue";
 import { EASE_OUT, fadeUp, staggerContainer } from "@/lib/motion";
 
 /**
@@ -121,8 +120,6 @@ export function HeroSection() {
           </motion.div>
         </motion.div>
       </div>
-
-      <ScrollCue href="#processo" />
     </section>
   );
 }
