@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { MapPin, Clock, Phone, MessageCircle } from "lucide-react";
+import { MapPin, Clock, Phone, MessageCircle, Star } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
 import { SITE } from "@/constants/data";
 
@@ -79,6 +79,18 @@ export function Footer() {
                 <MessageCircle className="h-5 w-5 text-green-500" aria-hidden />
                 WhatsApp
               </a>
+              {/* Só aparece depois que o link do Perfil da Empresa for configurado. */}
+              {SITE.googleReviewUrl && (
+                <a
+                  href={SITE.googleReviewUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-white/80 transition-colors hover:text-white"
+                >
+                  <Star className="h-5 w-5 text-gt-terracota" aria-hidden />
+                  Avalie-nos no Google
+                </a>
+              )}
             </div>
 
             {/* Horários */}

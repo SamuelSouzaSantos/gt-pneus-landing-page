@@ -414,6 +414,16 @@ export const SITE = {
   )}`,
   /** Localização da loja no Google Maps. */
   mapsUrl: "https://maps.app.goo.gl/Jt4Vak4oKpSgCTt59",
+  /**
+   * Link curto de avaliação do Perfil da Empresa no Google.
+   *
+   * Onde pegar: Perfil da Empresa → "Pedir avaliações" → copiar o link
+   * (formato `https://g.page/r/.../review`).
+   *
+   * Enquanto estiver vazio, o convite de avaliação não é renderizado no site
+   * e a ferramenta interna (/avaliar) avisa que falta configurar.
+   */
+  googleReviewUrl: "" as string,
   address: {
     line: "Quadra 204, Conjunto 02, Lote 11 - Residencial Oeste",
     city: "São Sebastião - DF",
