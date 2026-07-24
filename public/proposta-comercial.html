@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Proposta Comercial</title>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>body { margin: 0; }</style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel" data-presets="react">
+    function PropostaComercial() {
+      return (
+        <div className="proposta w-full min-h-screen py-10 px-4 sm:px-8">
+          <style>{`
+            @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&family=Inter:wght@300;400;500;600&display=swap');
+
+            .proposta {
+              --navy-900: #0A1C33;
+              --navy-700: #143257;
+              --navy-600: #16375F;
+              --blue-500: #2E63A6;
+              --brass:    #B08A3E;
+              --ink:      #1C2530;
+              --gray-600: #5C6675;
+              --gray-400: #97A0AC;
+              --gray-200: #E3E8EF;
+              --paper:    #FFFFFF;
+              --paper-alt:#F4F7FA;
+              background: var(--paper-alt);
+              font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+              color: var(--ink);
+            }
+            .sheet {
+              background: var(--paper);
+              box-shadow: 0 1px 2px rgba(10,28,51,.06), 0 18px 50px -20px rgba(10,28,51,.22);
+            }
+            .display { font-family: 'Newsreader', Georgia, serif; font-weight: 400; letter-spacing: -0.015em; }
+            .display-light { font-family: 'Newsreader', Georgia, serif; font-weight: 300; }
+            .eyebrow {
+              font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+              font-weight: 500; color: var(--gray-400);
+            }
+            .rule { height: 1px; background: var(--gray-200); }
+            .rule-dark { height: 1px; background: rgba(255,255,255,.16); }
+            .num {
+              font-family: 'Newsreader', Georgia, serif; font-size: 13px; font-weight: 400;
+              color: var(--brass); letter-spacing: .1em;
+            }
+            .ink-soft { color: var(--gray-600); }
+            .ink-faint { color: var(--gray-400); }
+            .navy { color: var(--navy-900); }
+            .bg-navy { background: var(--navy-900); }
+            .card { border: 1px solid var(--gray-200); background: var(--paper); }
+            .card-hero {
+              background: linear-gradient(170deg, #0E2544 0%, #0A1C33 60%, #0A1C33 100%);
+              border: 1px solid var(--navy-900);
+              box-shadow: 0 24px 48px -22px rgba(10,28,51,.55);
+            }
+            .badge {
+              background: var(--brass); color: #14202F;
+              font-size: 10px; letter-spacing: .16em; text-transform: uppercase; font-weight: 600;
+            }
+            .tick { color: var(--blue-500); }
+            .tick-light { color: #8FB4E0; }
+            .dash { color: var(--gray-400); }
+            .price-strike { color: var(--gray-400); }
+            @media print {
+              .proposta { background: #fff; padding: 0; }
+              .sheet { box-shadow: none; }
+            }
+          `}</style>
+
+          <div className="sheet mx-auto max-w-5xl">
+            {/* Capa / Introducao */}
+            <header className="px-7 sm:px-14 pt-12 sm:pt-16 pb-10">
+              <div className="flex items-baseline justify-between gap-4">
+                <span className="eyebrow">Proposta comercial</span>
+                <span className="eyebrow">Brasília · DF</span>
+              </div>
+
+              <h1 className="display navy mt-8 text-4xl sm:text-6xl leading-none">
+                Um mandato não cabe
+                <br />
+                <span className="display-light" style={{ color: "var(--blue-500)" }}>
+                  numa página de links.
+                </span>
+              </h1>
+
+              <p className="ink-soft mt-8 max-w-2xl text-base sm:text-lg leading-relaxed font-light">
+                A disputa pela atenção do eleitor não acontece no horário eleitoral. Acontece nos três
+                segundos entre ele tocar no link da sua bio e decidir se fica ou volta para o feed. Nesses
+                três segundos, uma página genérica — igual à de milhares de outros perfis, inclusive dos
+                seus adversários — entrega exatamente o que aparenta ser: um atalho descartável.
+              </p>
+              <p className="ink-soft mt-4 max-w-2xl text-base sm:text-lg leading-relaxed font-light">
+                Esta proposta é sobre a alternativa: um endereço que é seu, que o Google encontra, que abre
+                instantaneamente e que não escolhe justamente a hora do pico para sair do ar.
+              </p>
+
+              <div className="rule mt-12" />
+            </header>
+
+            {/* 01 O problema */}
+            <section className="px-7 sm:px-14 py-12">
+              <div className="flex items-center gap-4">
+                <span className="num">01</span>
+                <h2 className="display navy text-2xl sm:text-3xl">O problema das bios comuns</h2>
+              </div>
+
+              <div className="mt-9 grid gap-10 lg:grid-cols-2">
+                <div className="space-y-7">
+                  {[
+                    {
+                      t: "O endereço não é seu",
+                      d: "A plataforma muda a regra, sobe o preço ou simplesmente encerra o serviço — e leva junto todo o histórico que você construiu ali.",
+                    },
+                    {
+                      t: "O Google não te encontra",
+                      d: "Quem pesquisa o seu nome cai na versão dos outros: matéria de terceiro, recorte de adversário, comentário antigo. A sua palavra não aparece na primeira página porque não existe estrutura para aparecer.",
+                    },
+                    {
+                      t: "Todo mundo tem a mesma cara",
+                      d: "Mesmo modelo, mesma sequência de botões, mesma tipografia. Autoridade não se comunica com um layout que qualquer pessoa monta em dez minutos.",
+                    },
+                    {
+                      t: "E, quando importa, cai",
+                      d: "A live viraliza, a matéria sai, milhares de pessoas entram ao mesmo tempo — e a página trava exatamente no momento em que o tráfego valia mais.",
+                    },
+                  ].map((item) => (
+                    <div key={item.t} className="pl-5" style={{ borderLeft: "2px solid var(--gray-200)" }}>
+                      <h3 className="navy text-base font-semibold tracking-tight">{item.t}</h3>
+                      <p className="ink-soft mt-2 text-sm leading-relaxed font-light">{item.d}</p>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Grafico assinatura: comportamento sob pico de trafego */}
+                <div className="card p-6 self-start">
+                  <span className="eyebrow">Comportamento sob pico de acesso</span>
+                  <svg viewBox="0 0 420 190" className="w-full mt-5" role="img"
+                       aria-label="Comparação: página comum cai durante o pico de acesso; estrutura própria se mantém no ar">
+                    <defs>
+                      <linearGradient id="demanda" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#2E63A6" stopOpacity="0.10" />
+                        <stop offset="100%" stopColor="#2E63A6" stopOpacity="0" />
+                      </linearGradient>
+                    </defs>
+
+                    <line x1="12" y1="158" x2="408" y2="158" stroke="#E3E8EF" strokeWidth="1" />
+                    <line x1="12" y1="30" x2="408" y2="30" stroke="#E3E8EF" strokeWidth="1" strokeDasharray="2 4" />
+
+                    <path d="M12,158 C 90,158 120,44 170,38 L 408,38 L 408,158 Z" fill="url(#demanda)" />
+
+                    <path d="M12,158 C 90,158 120,46 170,40 L 408,40"
+                          fill="none" stroke="#0A1C33" strokeWidth="2.5" strokeLinecap="round" />
+
+                    <path d="M12,158 C 90,158 120,50 168,44 L 196,44"
+                          fill="none" stroke="#97A0AC" strokeWidth="2" strokeLinecap="round" />
+                    <path d="M196,44 L 206,152 L 408,154"
+                          fill="none" stroke="#97A0AC" strokeWidth="2" strokeDasharray="4 4" strokeLinecap="round" />
+                    <circle cx="200" cy="96" r="3.5" fill="#B08A3E" />
+
+                    <text x="216" y="92" fill="#B08A3E" fontSize="10" fontFamily="Inter, sans-serif"
+                          letterSpacing="0.12em">FORA DO AR</text>
+                    <text x="12" y="24" fill="#5C6675" fontSize="10" fontFamily="Inter, sans-serif">
+                      visitantes atendidos
+                    </text>
+                    <text x="12" y="178" fill="#97A0AC" fontSize="10" fontFamily="Inter, sans-serif">
+                      publicação
+                    </text>
+                    <text x="360" y="178" fill="#97A0AC" fontSize="10" fontFamily="Inter, sans-serif">
+                      +2h
+                    </text>
+                  </svg>
+
+                  <div className="rule my-5" />
+                  <div className="space-y-2.5">
+                    <div className="flex items-center gap-3">
+                      <span className="inline-block" style={{ width: 22, height: 2.5, background: "var(--navy-900)" }} />
+                      <span className="text-xs ink-soft">Estrutura própria — segue no ar</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <span className="inline-block" style={{ width: 22, height: 2, background: "var(--gray-400)" }} />
+                      <span className="text-xs ink-soft">Página de links comum — cai no pico</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <div className="px-7 sm:px-14"><div className="rule" /></div>
+
+            {/* 02 A solucao */}
+            <section className="px-7 sm:px-14 py-12">
+              <div className="flex items-center gap-4">
+                <span className="num">02</span>
+                <h2 className="display navy text-2xl sm:text-3xl">A solução</h2>
+              </div>
+
+              <p className="ink-soft mt-5 max-w-2xl text-base leading-relaxed font-light">
+                Não é um agregador de links com a sua foto. É um site de verdade, construído sob medida,
+                com quatro compromissos:
+              </p>
+
+              <div className="mt-9 grid gap-px" style={{ background: "var(--gray-200)" }}>
+                <div className="grid sm:grid-cols-2 gap-px" style={{ background: "var(--gray-200)" }}>
+                  {[
+                    {
+                      n: "I",
+                      t: "Abre antes do eleitor desistir",
+                      d: "A página carrega de uma vez e responde ao toque na hora — sem aquela tela branca de espera que faz metade das pessoas voltarem antes de ver qualquer coisa.",
+                    },
+                    {
+                      n: "II",
+                      t: "O seu nome, na sua versão, no Google",
+                      d: "O site é construído para ser lido e indexado pelos buscadores. Quem pesquisar por você encontra o seu material — não só o que falaram sobre você.",
+                    },
+                    {
+                      n: "III",
+                      t: "Aguenta o dia em que todo mundo chega junto",
+                      d: "A estrutura foi dimensionada para picos: a live que estoura, a nota que repercute, o compartilhamento em massa. O tráfego chega e o site continua respondendo.",
+                    },
+                    {
+                      n: "IV",
+                      t: "Cada bloco tem uma função",
+                      d: "Agenda, contato direto, cadastro de apoiador, materiais para imprensa. Não é vitrine: é uma página desenhada para transformar visita em contato registrado.",
+                    },
+                  ].map((b) => (
+                    <div key={b.n} className="bg-white p-7">
+                      <span className="num">{b.n}</span>
+                      <h3 className="navy mt-3 text-lg font-semibold tracking-tight">{b.t}</h3>
+                      <p className="ink-soft mt-2.5 text-sm leading-relaxed font-light">{b.d}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* 03 Planos */}
+            <section className="bg-navy px-7 sm:px-14 py-14">
+              <div className="flex items-center gap-4">
+                <span className="num">03</span>
+                <h2 className="display text-2xl sm:text-3xl" style={{ color: "#FFFFFF" }}>
+                  Planos e investimento
+                </h2>
+              </div>
+              <p className="mt-5 max-w-2xl text-base leading-relaxed font-light" style={{ color: "#B9C4D2" }}>
+                Três formatos. Um deles é o que corresponde ao seu momento — os outros dois estão aqui para
+                que a diferença fique clara.
+              </p>
+
+              <div className="mt-10 grid gap-6 lg:grid-cols-3 items-start">
+                {/* Basico */}
+                <div className="card p-7 lg:mt-8">
+                  <span className="eyebrow">Plano I</span>
+                  <h3 className="display navy mt-2 text-2xl">Presença</h3>
+                  <p className="ink-faint text-xs mt-1">Estrutura mínima para existir</p>
+
+                  <div className="rule my-6" />
+
+                  <div className="flex items-baseline gap-2">
+                    <span className="display navy text-3xl">R$ 1.200</span>
+                    <span className="ink-faint text-xs">implantação</span>
+                  </div>
+                  <div className="ink-soft text-sm mt-1">+ R$ 150 / mês</div>
+
+                  <div className="rule my-6" />
+
+                  <ul className="space-y-3 text-sm">
+                    {["Site publicado em endereço próprio", "Hospedagem compartilhada", "Estrutura fixa de páginas"].map((f) => (
+                      <li key={f} className="flex gap-3">
+                        <span className="tick">—</span>
+                        <span className="ink-soft font-light">{f}</span>
+                      </li>
+                    ))}
+                    {[
+                      "Sem atualizações de conteúdo inclusas",
+                      "Sem layout otimizado para captação",
+                      "Sem garantia de estabilidade em picos",
+                    ].map((f) => (
+                      <li key={f} className="flex gap-3">
+                        <span className="dash">×</span>
+                        <span className="ink-faint font-light">{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <p className="ink-faint text-xs mt-7 leading-relaxed">
+                    Indicado para quem só precisa de um endereço no ar. Toda alteração posterior é cobrada à
+                    parte e depende de agenda.
+                  </p>
+                </div>
+
+                {/* Intermediario - DESTAQUE */}
+                <div className="card-hero p-7 pb-8 relative">
+                  <div className="absolute left-7 badge px-3 py-1" style={{ top: -12 }}>
+                    Recomendado
+                  </div>
+
+                  <span className="eyebrow" style={{ color: "#8FB4E0" }}>Plano II</span>
+                  <h3 className="display mt-2 text-2xl" style={{ color: "#FFFFFF" }}>Mandato</h3>
+                  <p className="text-xs mt-1" style={{ color: "#8FB4E0" }}>
+                    O equilíbrio entre custo e resultado
+                  </p>
+
+                  <div className="rule-dark my-6" />
+
+                  <div className="flex items-baseline gap-2">
+                    <span className="display text-3xl" style={{ color: "#FFFFFF" }}>R$ 2.200</span>
+                    <span className="text-xs" style={{ color: "#8FB4E0" }}>implantação</span>
+                  </div>
+                  <div className="text-sm mt-1" style={{ color: "#D6DEE8" }}>+ R$ 297 / mês</div>
+
+                  <div className="rule-dark my-6" />
+
+                  <ul className="space-y-3 text-sm">
+                    {[
+                      "Tudo do plano Presença",
+                      "Carregamento instantâneo em qualquer celular",
+                      "Design desenhado para converter visita em contato",
+                      "Servidor com certificado de segurança avançado",
+                      "Estabilidade garantida em picos de acesso",
+                      "2 atualizações de conteúdo por mês inclusas",
+                      "Otimização para busca pelo seu nome no Google",
+                    ].map((f) => (
+                      <li key={f} className="flex gap-3">
+                        <span className="tick-light">—</span>
+                        <span className="font-light" style={{ color: "#E6ECF3" }}>{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <p className="text-xs mt-7 leading-relaxed" style={{ color: "#8FB4E0" }}>
+                    É o plano que entrega tudo o que a operação digital de um mandato usa no dia a dia —
+                    sem pagar por estrutura que ficaria parada.
+                  </p>
+                </div>
+
+                {/* Premium */}
+                <div className="card p-7 lg:mt-8">
+                  <span className="eyebrow">Plano III</span>
+                  <h3 className="display navy mt-2 text-2xl">Operação</h3>
+                  <p className="ink-faint text-xs mt-1">Infraestrutura de campanha ampliada</p>
+
+                  <div className="rule my-6" />
+
+                  <div className="flex items-baseline gap-2">
+                    <span className="display navy text-3xl">R$ 4.500</span>
+                    <span className="ink-faint text-xs">implantação</span>
+                  </div>
+                  <div className="ink-soft text-sm mt-1">+ R$ 890 / mês</div>
+
+                  <div className="rule my-6" />
+
+                  <ul className="space-y-3 text-sm">
+                    {[
+                      "Tudo do plano Mandato",
+                      "Servidor dedicado e isolado",
+                      "Integração com CRM de base eleitoral",
+                      "Automações completas de captação",
+                      "Site em múltiplos idiomas",
+                      "Suporte técnico 24 horas",
+                    ].map((f) => (
+                      <li key={f} className="flex gap-3">
+                        <span className="tick">—</span>
+                        <span className="ink-soft font-light">{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <p className="ink-faint text-xs mt-7 leading-relaxed">
+                    Faz sentido quando existir uma equipe de marketing dedicada operando CRM e automações
+                    todos os dias. Antes disso, boa parte dessa estrutura fica ociosa — e paga.
+                  </p>
+                </div>
+              </div>
+
+              <p className="mt-10 text-xs font-light" style={{ color: "#8FB4E0" }}>
+                Valores de implantação pagos na assinatura do contrato. Mensalidade cobre hospedagem,
+                certificado de segurança, monitoramento e os serviços listados em cada plano. Migração
+                entre planos a qualquer momento, com abatimento do valor já investido na implantação.
+              </p>
+            </section>
+
+            {/* Proximos passos */}
+            <section className="px-7 sm:px-14 py-14">
+              <div className="grid gap-10 lg:grid-cols-3">
+                <div className="lg:col-span-2">
+                  <span className="eyebrow">Próximos passos</span>
+                  <h2 className="display navy mt-3 text-2xl sm:text-3xl leading-snug">
+                    O site entra no ar antes do próximo pico —
+                    <span className="display-light ink-soft"> não depois dele.</span>
+                  </h2>
+                  <p className="ink-soft mt-5 max-w-xl text-sm leading-relaxed font-light">
+                    Aprovado o plano, o processo tem três etapas: reunião de conteúdo e direção visual,
+                    desenvolvimento e revisão, publicação. Prazo estimado de entrega a combinar conforme o
+                    volume de material disponível.
+                  </p>
+                </div>
+
+                <div className="card p-6 self-start">
+                  <span className="eyebrow">Contato</span>
+                  <div className="rule my-4" />
+                  <p className="navy text-sm font-medium">[ Seu nome ]</p>
+                  <p className="ink-soft text-sm mt-1">[ telefone · e-mail ]</p>
+                  <p className="ink-faint text-xs mt-5 leading-relaxed">
+                    Proposta válida por 15 dias a partir da data de envio.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <footer className="px-7 sm:px-14 py-6" style={{ borderTop: "1px solid var(--gray-200)" }}>
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <span className="eyebrow">Proposta comercial · Desenvolvimento web</span>
+                <span className="eyebrow">Documento confidencial</span>
+              </div>
+            </footer>
+          </div>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<PropostaComercial />);
+  </script>
+</body>
+</html>

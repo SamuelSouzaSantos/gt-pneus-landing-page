@@ -168,6 +168,9 @@ export const NAV_LINKS: NavLink[] = [
 /** Número de WhatsApp em formato internacional (E.164, sem símbolos). */
 const WHATSAPP_NUMBER = "5561992806373";
 
+/** Nome comercial da marca — fonte única para UI, metadados e JSON-LD. */
+const BRAND_NAME = "GT PNEUS & RODAS";
+
 export interface BusinessHour {
   /** Dias a que a faixa se aplica (ex.: "Seg – Sex"). */
   days: string;
@@ -176,7 +179,7 @@ export interface BusinessHour {
 }
 
 export const SITE = {
-  name: "GT Pneus e Rodas",
+  name: BRAND_NAME,
   shortName: "GT",
   tagline:
     "Especialista em solda de alumínio e reformas de rodas. Trabalho de ponta, entregando qualidade.",
@@ -184,7 +187,7 @@ export const SITE = {
   whatsappNumber: WHATSAPP_NUMBER,
   /** Link direto para a API do WhatsApp (funciona em web e mobile). */
   whatsappUrl: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-    "Olá! Gostaria de um orçamento na GT Pneus e Rodas."
+    `Olá! Gostaria de um orçamento na ${BRAND_NAME}.`
   )}`,
   /** Localização da loja no Google Maps. */
   mapsUrl: "https://maps.app.goo.gl/Jt4Vak4oKpSgCTt59",

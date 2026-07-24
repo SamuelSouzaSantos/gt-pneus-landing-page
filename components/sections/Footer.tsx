@@ -16,7 +16,7 @@ export function Footer() {
         <div className="relative mb-14 h-56 w-full overflow-hidden rounded-2xl ring-1 ring-white/10 sm:h-72">
           <Image
             src="/images/foto-loja.jpg"
-            alt="Fachada da loja GT Pneus e Rodas em São Sebastião - DF"
+            alt={`Fachada da loja ${SITE.name} em ${SITE.address.city}`}
             fill
             sizes="(max-width: 1280px) 100vw, 1216px"
             className="object-cover"
@@ -48,7 +48,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               className="group flex items-start gap-3"
-              aria-label="Abrir a localização da GT Pneus e Rodas no Google Maps"
+              aria-label={`Abrir a localização da ${SITE.name} no Google Maps`}
             >
               <MapPin
                 className="mt-1 h-5 w-5 shrink-0 text-gt-terracota"
@@ -110,7 +110,11 @@ export function Footer() {
             </h3>
             <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl bg-gt-black ring-1 ring-white/10">
               <iframe
-                title="Localização GT Pneus e Rodas no Google Maps"
+                title={`Localização ${SITE.name} no Google Maps`}
+                /* O `q` é o termo de busca do Google Maps e precisa casar com
+                   o nome REGISTRADO no Perfil da Empresa (hoje "Gt Pneus E
+                   Rodas") — por isso não acompanha o nome comercial exibido
+                   no site. Se o perfil for renomeado, atualizar aqui. */
                 src="https://www.google.com/maps?q=GT%20Pneus%20e%20Rodas%2C%20S%C3%A3o%20Sebasti%C3%A3o%20-%20DF&z=17&hl=pt-BR&output=embed"
                 className="h-full w-full border-0"
                 loading="lazy"

@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 
 /**
- * GT Pneus e Rodas — Tema "Premium Automotive" (visual escuro + terracota).
+ * GT PNEUS & RODAS — Tema "Premium Automotive" (visual escuro + terracota).
  *
  * A paleta é intencionalmente enxuta e semântica para escalar com facilidade
  * quando o projeto evoluir para um SaaS (dashboards, painéis administrativos,

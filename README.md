@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🔧 GT Pneus e Rodas — Landing Page de Alta Conversão
+# 🔧 GT PNEUS & RODAS — Landing Page de Alta Conversão
 
 **Onde a maioria desiste, nós recuperamos.**
 
@@ -69,7 +69,7 @@ O resultado é uma vitrine que transforma um serviço braçal em uma **marca pre
 A estrutura separa **dados**, **UI** e **lógica**, mantendo o máximo de **Server Components** e isolando a interatividade em *Client Components* — pronta para escalar de uma landing page para um futuro **SaaS**.
 
 ```
-GT Pneus e Rodas/
+gt-pneus-landing-page/
 ├── app/                      # App Router (Next.js)
 │   ├── layout.tsx            # Layout raiz · metadata SEO · JSON-LD · providers
 │   ├── page.tsx              # Composição das seções da home
@@ -175,6 +175,6 @@ Distribuído sob a licença **MIT**. Fique à vontade para usar como referência
 
 <div align="center">
 
-Feito com ⚙️ e ☕ para a **GT Pneus e Rodas** — São Sebastião · Distrito Federal
+Feito com ⚙️ e ☕ para a **GT PNEUS & RODAS** — São Sebastião · Distrito Federal
 
 </div>

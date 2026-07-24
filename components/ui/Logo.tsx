@@ -12,7 +12,7 @@ interface LogoProps {
 
 /**
  * Marca da GT: o emblema (pneu + engrenagem formando o "G") em branco,
- * acompanhado do wordmark "GT Pneus e Rodas". O símbolo é um PNG transparente,
+ * acompanhado do wordmark "GT PNEUS & RODAS". O símbolo é um PNG transparente,
  * então assenta bem tanto sobre o vídeo do Hero quanto sobre as seções escuras.
  */
 export function Logo({ className, showText = true, priority = false }: LogoProps) {

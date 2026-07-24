@@ -1,7 +1,7 @@
 import type { Variants } from "framer-motion";
 
 /**
- * Vocabulário de movimento compartilhado da GT Pneus e Rodas.
+ * Vocabulário de movimento compartilhado da GT PNEUS & RODAS.
  *
  * A identidade é uma oficina que "traz a roda de volta à vida": o movimento
  * evoca precisão e restauração — entradas que sobem com firmeza (nada de
