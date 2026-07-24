@@ -47,6 +47,28 @@ html.lenis body {
 }
 
 /* -------------------------------------------------------------------------- */
+/* FAQ — revelação suave da resposta ao abrir o <details>.                    */
+/* Fica atrás de `no-preference`: quem pede menos movimento vê a resposta      */
+/* aparecer instantaneamente.                                                  */
+/* -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  details[open] > .faq-answer {
+    animation: faq-reveal 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+@keyframes faq-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* -------------------------------------------------------------------------- */
 /* Cursor customizado                                                         */
 /* Ponto + anel que substituem o ponteiro nativo (só quando o componente      */
 /* CustomCursor está ativo, que adiciona `.cursor-none` no <html>). As         */

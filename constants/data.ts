@@ -27,6 +27,12 @@ export type ServiceTier = "premium" | "essential";
  * não sites: uma home sozinha não compete bem por "solda de alumínio São
  * Sebastião" e "desempeno de rodas São Sebastião" ao mesmo tempo.
  */
+/** Pergunta e resposta — alimenta o acordeão e o schema FAQPage. */
+export interface FaqItem {
+  question: string;
+  answer: string;
+}
+
 export interface ServicePage {
   /** H1 da página — combina o termo de busca com a cidade. */
   heading: string;
@@ -36,6 +42,11 @@ export interface ServicePage {
   intro: string[];
   /** O que está incluso / por que importa. */
   highlights: string[];
+  /**
+   * Dúvidas específicas do serviço. Miram buscas de cauda longa ("roda
+   * trincada tem conserto?") e derrubam objeções antes do contato.
+   */
+  faq: FaqItem[];
 }
 
 export interface Service {
@@ -97,6 +108,23 @@ export const PREMIUM_SERVICES: Service[] = [
         "Acabamento e pintura para devolver o visual de nova",
         "Avaliação honesta: recusamos o que não é seguro recuperar",
       ],
+      faq: [
+        {
+          question: "Vale mais a pena reformar a roda ou comprar uma nova?",
+          answer:
+            "Na maioria dos casos a reforma sai bem mais em conta que uma roda nova, principalmente em liga leve. Avaliamos a peça antes e, se a recuperação não for segura, avisamos na hora — não fazemos serviço que coloque você em risco.",
+        },
+        {
+          question: "Dá para reformar roda raspada no meio-fio?",
+          answer:
+            "Sim, esse é um dos casos mais comuns aqui. A borda danificada é recuperada e recebe acabamento, devolvendo a aparência e a vedação do pneu.",
+        },
+        {
+          question: "A roda reformada fica igual a uma nova?",
+          answer:
+            "O objetivo é devolver a integridade estrutural e um acabamento bem próximo do original. Em danos severos pode restar alguma marca, e nós adiantamos isso no orçamento em vez de prometer o impossível.",
+        },
+      ],
     },
   },
   {
@@ -122,6 +150,23 @@ export const PREMIUM_SERVICES: Service[] = [
         "Limpeza e preparo da área antes da solda",
         "Foco em resistência estrutural, não só na aparência",
         "Também soldamos outras peças de alumínio, além de rodas",
+      ],
+      faq: [
+        {
+          question: "Roda trincada tem conserto seguro?",
+          answer:
+            "Depende de onde está a trinca e da extensão do dano. Trincas em regiões que não comprometem a estrutura podem ser soldadas e voltam a suportar esforço. Já trincas em pontos críticos condenam a roda — e nesse caso recomendamos a troca em vez de arriscar.",
+        },
+        {
+          question: "Por que solda TIG para alumínio?",
+          answer:
+            "O TIG permite controlar o calor com precisão e gera um cordão limpo, com a penetração necessária no alumínio. Processos inadequados tendem a criar porosidade e uma solda que volta a abrir sob carga.",
+        },
+        {
+          question: "Vocês soldam outras peças de alumínio além de rodas?",
+          answer:
+            "Sim. Rodas são a maior parte do movimento, mas avaliamos outras peças de alumínio — traga a sua para vermos o que dá para fazer.",
+        },
       ],
     },
   },
@@ -155,6 +200,18 @@ export const ESSENTIAL_SERVICES: Service[] = [
         "Menos desgaste irregular de pneus e suspensão",
         "Serviço ágil, para você voltar logo à estrada",
       ],
+      faq: [
+        {
+          question: "Como sei que minha roda está empenada?",
+          answer:
+            "Os sinais mais comuns são trepidação no volante a partir de certa velocidade, vibração no assoalho e pneu gastando mais de um lado. Costuma aparecer depois de um buraco, meio-fio ou lombada pega mais forte.",
+        },
+        {
+          question: "Desempeno resolve sozinho ou preciso balancear também?",
+          answer:
+            "Os dois normalmente andam juntos: primeiro a roda volta ao plano no desempeno, depois o balanceamento acerta a distribuição de peso. Balancear uma roda empenada não elimina a vibração.",
+        },
+      ],
     },
   },
   {
@@ -180,6 +237,18 @@ export const ESSENTIAL_SERVICES: Service[] = [
         "Recomendado a cada troca ou rodízio de pneus",
         "Combina com o desempeno quando a roda está empenada",
       ],
+      faq: [
+        {
+          question: "De quanto em quanto tempo devo balancear?",
+          answer:
+            "A recomendação geral é a cada troca ou rodízio de pneus — ou sempre que sentir vibração no volante. Depois de pegar um buraco forte também vale conferir.",
+        },
+        {
+          question: "Balanceamento resolve a trepidação do volante?",
+          answer:
+            "Se a causa for desequilíbrio de peso, sim. Se a roda estiver empenada, é preciso desempenar antes: sem isso, o balanceamento não dá conta sozinho.",
+        },
+      ],
     },
   },
   {
@@ -204,6 +273,18 @@ export const ESSENTIAL_SERVICES: Service[] = [
         "Montagem cuidadosa, sem marcar a roda",
         "Calibragem e conferência",
         "Atendimento ágil, sem fila desnecessária",
+      ],
+      faq: [
+        {
+          question: "Vocês consertam pneu furado?",
+          answer:
+            "Sim, quando o furo está em uma região reparável e o pneu ainda tem condição de uso seguro. Se o dano for na lateral ou o pneu estiver comprometido, orientamos a troca.",
+        },
+        {
+          question: "A montagem pode marcar a roda de liga leve?",
+          answer:
+            "Com equipamento adequado e cuidado no processo, não. É justamente por isso que damos atenção a esse detalhe: uma montagem descuidada deixa marca permanente na roda.",
+        },
       ],
     },
   },
@@ -250,6 +331,48 @@ export const PROCESS_STEPS: ProcessStep[] = [
     title: "Entrega com Garantia",
     description: "Você recebe a peça com qualidade GT.",
     icon: ShieldCheck,
+  },
+];
+
+/* -------------------------------------------------------------------------- */
+/*                          Dúvidas frequentes (home)                         */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * Dúvidas gerais do negócio — exibidas na home e publicadas como FAQPage.
+ * As perguntas específicas de cada serviço ficam em `service.page.faq`, para
+ * o schema de cada página refletir exatamente o conteúdo visível nela.
+ */
+export const GENERAL_FAQ: FaqItem[] = [
+  {
+    question: "Como peço um orçamento?",
+    answer:
+      "O jeito mais rápido é mandar fotos da peça pelo WhatsApp (61) 99280-6373. Só com as imagens já conseguimos indicar o que dá para fazer. Se preferir, é só passar na loja em São Sebastião - DF.",
+  },
+  {
+    question: "Vale mais a pena recuperar a roda ou comprar uma nova?",
+    answer:
+      "Na maioria dos casos a recuperação sai bem mais em conta, principalmente em rodas de liga leve. Avaliamos a peça antes e, se não for seguro recuperar, falamos isso abertamente.",
+  },
+  {
+    question: "Vocês trabalham com rodas de liga leve e de aço?",
+    answer:
+      "Sim, atendemos os dois tipos, de carros de passeio a utilitários.",
+  },
+  {
+    question: "Quanto tempo demora o serviço?",
+    answer:
+      "Depende do tipo de dano e do movimento do dia. Serviços como balanceamento e desempeno costumam ser rápidos; já uma reforma completa, que envolve solda e acabamento, leva mais tempo. O prazo vai junto com o orçamento, sem surpresa.",
+  },
+  {
+    question: "Qual o horário de funcionamento?",
+    answer:
+      "Segunda a sexta, das 08:00 às 18:00. Sábado, domingo e feriados não abrimos.",
+  },
+  {
+    question: "Onde vocês ficam?",
+    answer:
+      "Na Quadra 204, Conjunto 02, Lote 11 - Residencial Oeste, São Sebastião - DF. O mapa com a rota está aqui mesmo no site, na seção de contato.",
   },
 ];
 

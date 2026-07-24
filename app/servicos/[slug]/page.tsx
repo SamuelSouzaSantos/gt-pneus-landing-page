@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Check, MessageCircle, Phone } from "lucide-react";
+import { FaqSection } from "@/components/sections/FaqSection";
 import { Footer } from "@/components/sections/Footer";
 import { ALL_SERVICES, SITE } from "@/constants/data";
 
@@ -175,6 +176,13 @@ export default async function ServicoPage({
               </a>
             </div>
           </section>
+
+          {/* Dúvidas específicas deste serviço (+ schema FAQPage) */}
+          <FaqSection
+            items={service.page.faq}
+            contained={false}
+            className="mt-16"
+          />
 
           {/* Outros serviços — linkagem interna */}
           <h2 className="mt-16 text-2xl font-extrabold">Outros serviços</h2>
