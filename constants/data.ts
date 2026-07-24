@@ -20,16 +20,36 @@ import {
  */
 export type ServiceTier = "premium" | "essential";
 
+/**
+ * Conteúdo da página dedicada de cada serviço (`/servicos/[slug]`).
+ *
+ * Cada serviço ganha sua própria página porque o Google ranqueia **páginas**,
+ * não sites: uma home sozinha não compete bem por "solda de alumínio São
+ * Sebastião" e "desempeno de rodas São Sebastião" ao mesmo tempo.
+ */
+export interface ServicePage {
+  /** H1 da página — combina o termo de busca com a cidade. */
+  heading: string;
+  /** Meta description (~150–160 caracteres). */
+  metaDescription: string;
+  /** Parágrafos de abertura, em linguagem de cliente. */
+  intro: string[];
+  /** O que está incluso / por que importa. */
+  highlights: string[];
+}
+
 export interface Service {
   /** Identificador estável — usar como chave de banco/rota no futuro. */
   id: string;
-  /** Slug amigável para URLs (ex.: /servicos/solda-de-rodas). */
+  /** Slug amigável para URLs (ex.: /servicos/solda-de-aluminio). */
   slug: string;
   title: string;
   description: string;
   /** Ícone Lucide como componente — renderizado pela UI. */
   icon: LucideIcon;
   tier: ServiceTier;
+  /** Conteúdo da landing dedicada do serviço. */
+  page: ServicePage;
   /** Destaque na home / vitrine. */
   featured?: boolean;
 }
@@ -62,6 +82,22 @@ export const PREMIUM_SERVICES: Service[] = [
     icon: Wrench,
     tier: "premium",
     featured: true,
+    page: {
+      heading: "Reforma de Rodas em São Sebastião - DF",
+      metaDescription:
+        "Reforma de rodas de liga leve e aço em São Sebastião - DF. Recuperamos trincas, empenos e acabamento, devolvendo resistência e visual de nova.",
+      intro: [
+        "Roda raspada no meio-fio, trincada ou com o acabamento castigado pelo tempo não precisa virar sucata. A reforma devolve a integridade estrutural e a aparência da peça — por uma fração do preço de uma roda nova.",
+        "Trabalhamos com rodas de liga leve e aço, de carros de passeio a utilitários. Toda peça passa por avaliação técnica antes do serviço: se a roda não tiver condição segura de recuperação, a gente fala isso na hora, sem enrolação.",
+      ],
+      highlights: [
+        "Recuperação de trincas com solda de alumínio (TIG)",
+        "Correção de empenos e desempeno de precisão",
+        "Reparo de bordas danificadas por meio-fio e buraco",
+        "Acabamento e pintura para devolver o visual de nova",
+        "Avaliação honesta: recusamos o que não é seguro recuperar",
+      ],
+    },
   },
   {
     id: "srv-solda-aluminio",
@@ -72,6 +108,22 @@ export const PREMIUM_SERVICES: Service[] = [
     icon: Flame,
     tier: "premium",
     featured: true,
+    page: {
+      heading: "Solda de Alumínio em São Sebastião - DF",
+      metaDescription:
+        "Solda de alumínio com processo TIG em São Sebastião - DF. Reparo de trincas e furos em rodas e peças, com precisão estrutural e décadas de experiência.",
+      intro: [
+        "Alumínio não perdoa improviso: exige preparo da superfície, controle de temperatura e o processo certo. Por isso trabalhamos com solda TIG, que entrega o cordão limpo e a penetração necessária para a peça voltar a aguentar esforço de verdade.",
+        "Não é só estética — é segurança. Uma trinca mal resolvida volta a abrir sob carga. Nosso foco é devolver a integridade estrutural da peça, com décadas de experiência em alumínio.",
+      ],
+      highlights: [
+        "Processo TIG, o indicado para alumínio",
+        "Reparo de trincas, furos e quebras",
+        "Limpeza e preparo da área antes da solda",
+        "Foco em resistência estrutural, não só na aparência",
+        "Também soldamos outras peças de alumínio, além de rodas",
+      ],
+    },
   },
 ];
 
@@ -88,6 +140,22 @@ export const ESSENTIAL_SERVICES: Service[] = [
       "Correção de rodas empenadas que causam trepidação e desgaste irregular dos pneus, restaurando o rodar original do veículo.",
     icon: Hammer,
     tier: "essential",
+    page: {
+      heading: "Desempeno de Rodas em São Sebastião - DF",
+      metaDescription:
+        "Desempeno de rodas em São Sebastião - DF. Corrigimos rodas empenadas que causam trepidação no volante e desgaste irregular dos pneus.",
+      intro: [
+        "Volante trepidando a partir de certa velocidade, pneu gastando mais de um lado ou um barulho diferente no rodar: na maioria das vezes é roda empenada — herança de buraco, meio-fio ou lombada pega mais forte.",
+        "No desempeno, a roda volta ao plano original em equipamento próprio. A vibração some e o desgaste prematuro do pneu e da suspensão para de acontecer.",
+      ],
+      highlights: [
+        "Diagnóstico do empeno antes de qualquer serviço",
+        "Correção de empenos no aro e na borda",
+        "Fim da trepidação no volante",
+        "Menos desgaste irregular de pneus e suspensão",
+        "Serviço ágil, para você voltar logo à estrada",
+      ],
+    },
   },
   {
     id: "srv-balanceamento",
@@ -97,6 +165,22 @@ export const ESSENTIAL_SERVICES: Service[] = [
       "Balanceamento que elimina vibrações no volante e prolonga a vida útil de pneus e suspensão.",
     icon: Gauge,
     tier: "essential",
+    page: {
+      heading: "Balanceamento de Rodas em São Sebastião - DF",
+      metaDescription:
+        "Balanceamento de rodas em São Sebastião - DF. Elimina a vibração no volante e prolonga a vida útil dos pneus e da suspensão. Fale conosco no WhatsApp.",
+      intro: [
+        "Pequenas diferenças de peso ao longo da roda viram vibração em velocidade. E vibração significa pneu gastando torto, direção desconfortável e suspensão sofrendo à toa.",
+        "O balanceamento redistribui esse peso e devolve o rodar liso. É um dos serviços mais baratos da oficina e um dos que mais evitam gasto grande lá na frente.",
+      ],
+      highlights: [
+        "Fim da vibração no volante e no assoalho",
+        "Desgaste uniforme dos pneus",
+        "Menos esforço na suspensão e nos rolamentos",
+        "Recomendado a cada troca ou rodízio de pneus",
+        "Combina com o desempeno quando a roda está empenada",
+      ],
+    },
   },
   {
     id: "srv-borracharia",
@@ -106,6 +190,22 @@ export const ESSENTIAL_SERVICES: Service[] = [
       "Troca, reparo e montagem de pneus com equipamento moderno e atendimento ágil para você não perder tempo.",
     icon: Disc3,
     tier: "essential",
+    page: {
+      heading: "Borracharia em São Sebastião - DF",
+      metaDescription:
+        "Borracharia em São Sebastião - DF: troca, reparo e montagem de pneus com equipamento moderno e atendimento ágil, sem marcar a sua roda.",
+      intro: [
+        "O básico, bem feito. Troca, reparo e montagem de pneus com equipamento que respeita a roda — detalhe que faz toda a diferença em liga leve, onde uma montagem descuidada deixa marca para sempre.",
+        "Furou, precisa trocar ou quer só conferir a calibragem? Passa aqui que a gente resolve rápido.",
+      ],
+      highlights: [
+        "Troca e montagem de pneus",
+        "Reparo de furos, quando o pneu permite com segurança",
+        "Montagem cuidadosa, sem marcar a roda",
+        "Calibragem e conferência",
+        "Atendimento ágil, sem fila desnecessária",
+      ],
+    },
   },
 ];
 

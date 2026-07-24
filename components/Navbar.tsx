@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
@@ -15,6 +16,15 @@ import { cn } from "@/lib/utils";
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
+  /**
+   * As âncoras (#servicos…) só existem na home. Fora dela, prefixamos com "/"
+   * para voltar à home na seção certa. Mantendo o "#" puro na home, o Lenis
+   * segue interceptando o clique e fazendo a rolagem suave.
+   */
+  const linkHref = (hash: string) => (isHome ? hash : `/${hash}`);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -36,7 +46,7 @@ export function Navbar() {
       )}
     >
       <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <a href="#inicio" aria-label={SITE.name}>
+        <a href={isHome ? "#inicio" : "/"} aria-label={SITE.name}>
           <Logo priority />
         </a>
 
@@ -46,7 +56,7 @@ export function Navbar() {
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
               <a
-                href={link.href}
+                href={linkHref(link.href)}
                 className="block rounded-full bg-white/[0.06] px-4 py-2 text-sm font-medium text-white/75 ring-1 ring-inset ring-white/10 transition-colors hover:bg-white/[0.14] hover:text-white"
               >
                 {link.label}
@@ -88,7 +98,7 @@ export function Navbar() {
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
                   <a
-                    href={link.href}
+                    href={linkHref(link.href)}
                     onClick={() => setMenuOpen(false)}
                     className="block rounded-xl bg-white/[0.06] px-4 py-3 text-base font-medium text-white/80 ring-1 ring-inset ring-white/10 transition-colors hover:bg-white/[0.14] hover:text-white"
                   >

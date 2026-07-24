@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { PREMIUM_SERVICES, ESSENTIAL_SERVICES } from "@/constants/data";
@@ -38,13 +39,22 @@ function PremiumCard({ service, index }: { service: Service; index: number }) {
           {service.description}
         </p>
 
-        <MagneticButton
-          href="#contato"
-          className="relative mt-6 inline-flex w-fit items-center gap-2 text-sm font-semibold text-white"
-        >
-          Solicitar orçamento
-          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-        </MagneticButton>
+        <div className="relative mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+          <MagneticButton
+            href="#contato"
+            className="inline-flex w-fit items-center gap-2 text-sm font-semibold text-white"
+          >
+            Solicitar orçamento
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+          </MagneticButton>
+
+          <Link
+            href={`/servicos/${service.slug}`}
+            className="inline-flex w-fit items-center gap-1.5 text-sm font-semibold text-white/80 underline-offset-4 transition-colors hover:text-white hover:underline"
+          >
+            Ver detalhes
+          </Link>
+        </div>
       </TiltCard>
     </motion.article>
   );
@@ -68,6 +78,16 @@ function EssentialCard({ service, index }: { service: Service; index: number }) 
       <p className="mt-2 text-sm leading-relaxed text-white/60">
         {service.description}
       </p>
+      <Link
+        href={`/servicos/${service.slug}`}
+        className="group mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-gt-terracota transition-opacity hover:opacity-80"
+      >
+        Ver detalhes
+        <ArrowRight
+          className="h-4 w-4 transition-transform group-hover:translate-x-1"
+          aria-hidden
+        />
+      </Link>
     </motion.article>
   );
 }
